@@ -6,6 +6,12 @@ metadata:
   labels:
     team: teamdagpenger
 spec:
+  liveness:
+    path: /isalive
+  readiness:
+    path: /isready
+  kafka:
+    pool: "{{ kafka.pool }}"
   image: {{ image }}
   port: 8080
   prometheus:
