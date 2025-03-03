@@ -10,7 +10,7 @@ jobs:
     name: Build and publish Docker image
     runs-on: ubuntu-latest
     permissions: # Sjekk https://docs.github.com/en/actions/using-jobs/assigning-permissions-to-jobs
-      contents: "read"
+      contents: "write"
       checks: "write"
       pull-requests: "write"
       id-token: "write"
@@ -44,7 +44,11 @@ jobs:
           project_id: ${{ vars.NAIS_MANAGEMENT_PROJECT_ID }}
     outputs:
       image: ${{ steps.docker-build-push.outputs.image }}
+
   deploy-dev:
+    permissions:
+      contents: read
+      id-token: write
     name: Deploy to dev
     needs: [ build ]
     if: github.ref == 'refs/heads/main'
@@ -63,6 +67,9 @@ jobs:
 #
 #  deploy-prod:
 #    name: Deploy to Production
+#    permissions:
+#      contents: read
+#      id-token: write
 #    needs: [ build ]
 #    if: github.ref == 'refs/heads/main'
 #    runs-on: ubuntu-latest
