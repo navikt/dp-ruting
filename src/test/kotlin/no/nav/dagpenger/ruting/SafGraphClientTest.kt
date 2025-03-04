@@ -8,10 +8,12 @@ import io.kubernetes.client.util.KubeConfig
 import kotlinx.coroutines.runBlocking
 import no.nav.dagpenger.oauth2.CachedOauth2Client
 import no.nav.dagpenger.oauth2.OAuth2Config
+import org.junit.jupiter.api.Disabled
 import org.junit.jupiter.api.Test
 import java.io.FileReader
 
 class SafGraphClientTest {
+    @Disabled
     @Test
     fun e2eTest() {
         SafGraphClient(
