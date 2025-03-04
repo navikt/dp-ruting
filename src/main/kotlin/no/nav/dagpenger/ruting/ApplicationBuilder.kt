@@ -32,7 +32,16 @@ internal class ApplicationBuilder(
             },
         ) { _: EmbeddedServer<CIOApplicationEngine, CIOApplicationEngine.Configuration>, rapid: KafkaRapid ->
             val mediator: Mediator = MediatorImpl()
-            JoarkMottak(rapid, mediator)
+            val safClient =
+                SafGraphClient(
+                    url = Configuration.safGraphqlUrl,
+                    tokenProvider = Configuration.safGraphqlTokenProvider,
+                )
+            JoarkMottak(
+                rapidsConnection = rapid,
+                safClient = safClient,
+                mediator = mediator,
+            )
         }
 
     init {

@@ -11,5 +11,6 @@ interface Mediator {
 internal class MediatorImpl : Mediator {
     override fun håndter(joarkHendelse: JoarkHendelse) {
         logger.info { "Håndterer joarkHendelse: $joarkHendelse" }
+        // hent JournalPost fra SAF.
     }
 }

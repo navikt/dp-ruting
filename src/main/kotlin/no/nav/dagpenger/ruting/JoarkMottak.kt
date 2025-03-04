@@ -13,6 +13,7 @@ private val logger = KotlinLogging.logger {}
 
 internal class JoarkMottak(
     rapidsConnection: RapidsConnection,
+    private val safClient: SafClient,
     private val mediator: Mediator,
 ) : PacketListener {
     companion object {

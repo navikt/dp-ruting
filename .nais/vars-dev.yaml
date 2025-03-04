@@ -1,2 +1,6 @@
 kafka:
   pool: nav-dev
+saf:
+  app: saf-q1
+  url: https://saf.dev-fss-pub.nais.io/graphql
+  scope: api://dev-fss.teamdokumenthandtering.saf-q1/.default

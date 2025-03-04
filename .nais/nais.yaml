@@ -11,7 +11,7 @@ spec:
   readiness:
     path: /isready
   kafka:
-    pool: "{{ kafka.pool }}"
+    pool: {{ kafka.pool }}
   image: {{ image }}
   port: 8080
   prometheus:
@@ -28,3 +28,16 @@ spec:
       memory: 256Mi
   secureLogs:
     enabled: true
+  env:
+    - name: SAF_GRAPHQL_URL
+      value: {{ saf.url }}
+    - name: SAF_SCOPE
+      value: {{ saf.scope }}
+  azure:
+    application:
+      enabled: true
+  accessPolicy:
+    outbound:
+      rules:
+        - application: {{ saf.app }}
+          namespace: teamdokumenthandtering

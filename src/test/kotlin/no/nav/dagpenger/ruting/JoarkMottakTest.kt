@@ -20,7 +20,7 @@ class JoarkMottakTest {
             mockk<Mediator>().also {
                 every { it.håndter(capture(slot)) } just Runs
             }
-        JoarkMottak(rapid, mediator)
+        JoarkMottak(rapidsConnection = rapid, safClient = mockk(), mediator = mediator)
         rapid.sendTestMessage(
             joarkMelding(
                 journalpostId = "123456789",

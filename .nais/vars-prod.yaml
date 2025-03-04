@@ -1,2 +1,6 @@
 kafka:
   pool: nav-prod
+saf:
+  app: saf
+  url: https://saf.prod-fss-pub.nais.io/graphql
+  scope: api://prod-fss.teamdokumenthandtering.saf/.default
