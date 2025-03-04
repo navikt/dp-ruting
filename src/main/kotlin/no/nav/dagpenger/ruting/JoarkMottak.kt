@@ -9,9 +9,7 @@ import com.github.navikt.tbd_libs.rapids_and_rivers_api.RapidsConnection
 import io.micrometer.core.instrument.MeterRegistry
 import mu.KotlinLogging
 
-
 private val logger = KotlinLogging.logger {}
-
 
 internal class JoarkMottak(
     rapidsConnection: RapidsConnection,
@@ -31,7 +29,6 @@ internal class JoarkMottak(
         River(rapidsConnection).apply(rapidFilter).register(this)
     }
 
-
     override fun onPacket(
         packet: JsonMessage,
         context: MessageContext,
@@ -44,8 +41,8 @@ internal class JoarkMottak(
     }
 }
 
-private fun JsonMessage.joarkHendelse() {
-    val joarkHendelse = JoarkHendelse(
+private fun JsonMessage.joarkHendelse(): JoarkHendelse {
+    return JoarkHendelse(
         journalpostId = this["journalpostId"].asText(),
         journalpostStatus = this["journalpostStatus"].asText(),
         temaNytt = this["temaNytt"].asText(),
@@ -61,5 +58,3 @@ data class JoarkHendelse(
     val hendelsesType: String,
     val mottaksKanal: String,
 )
-
-

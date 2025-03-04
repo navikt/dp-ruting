@@ -4,6 +4,8 @@ import com.fasterxml.jackson.module.kotlin.jacksonObjectMapper
 import com.github.navikt.tbd_libs.naisful.naisApp
 import com.github.navikt.tbd_libs.rapids_and_rivers.KafkaRapid
 import com.github.navikt.tbd_libs.rapids_and_rivers_api.RapidsConnection
+import io.ktor.server.cio.CIOApplicationEngine
+import io.ktor.server.engine.EmbeddedServer
 import io.micrometer.core.instrument.Clock
 import io.micrometer.prometheusmetrics.PrometheusConfig
 import io.micrometer.prometheusmetrics.PrometheusMeterRegistry
@@ -34,12 +36,12 @@ internal class ApplicationBuilder(
                         aliveCheck = rapid::isReady,
                         readyCheck = rapid::isReady,
                         preStopHook = preStopHook::handlePreStopRequest,
-//                        statusPagesConfig = { statusPagesConfig() },
-                    ) {
-                    }
+                    ) {}
                 }
             },
-        ) { _, _: KafkaRapid ->
+        ) { _: EmbeddedServer<CIOApplicationEngine, CIOApplicationEngine.Configuration>, rapid: KafkaRapid ->
+            val mediator: Mediator = MediatorImpl()
+            JoarkMottak(rapid, mediator)
         }
 
     init {
