@@ -19,7 +19,7 @@ interface SafClient {
 }
 
 data class Journalpost(
-    private val json: String,
+    val json: String,
 )
 
 class SafGraphClient(

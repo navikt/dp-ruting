@@ -19,6 +19,7 @@ dependencies {
     testImplementation(libs.bundles.naisful.rapid.and.rivers.test)
     testImplementation(libs.mockk)
     testImplementation(libs.bundles.kotest.assertions)
+    testImplementation("io.kubernetes:client-java:23.0.0")
 }
 
 application {
