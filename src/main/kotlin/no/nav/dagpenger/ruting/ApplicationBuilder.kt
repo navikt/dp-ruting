@@ -6,10 +6,6 @@ import com.github.navikt.tbd_libs.rapids_and_rivers.KafkaRapid
 import com.github.navikt.tbd_libs.rapids_and_rivers_api.RapidsConnection
 import io.ktor.server.cio.CIOApplicationEngine
 import io.ktor.server.engine.EmbeddedServer
-import io.micrometer.core.instrument.Clock
-import io.micrometer.prometheusmetrics.PrometheusConfig
-import io.micrometer.prometheusmetrics.PrometheusMeterRegistry
-import io.prometheus.metrics.model.registry.PrometheusRegistry
 import mu.KotlinLogging
 import no.nav.helse.rapids_rivers.RapidApplication
 
@@ -24,12 +20,7 @@ internal class ApplicationBuilder(
             builder = {
                 withKtor { preStopHook, rapid ->
                     naisApp(
-                        meterRegistry =
-                            PrometheusMeterRegistry(
-                                PrometheusConfig.DEFAULT,
-                                PrometheusRegistry.defaultRegistry,
-                                Clock.SYSTEM,
-                            ),
+                        meterRegistry = Configuration.prometheusRegistry,
                         objectMapper = jacksonObjectMapper(),
                         applicationLogger = KotlinLogging.logger("ApplicationLogger"),
                         callLogger = KotlinLogging.logger("CallLogger"),

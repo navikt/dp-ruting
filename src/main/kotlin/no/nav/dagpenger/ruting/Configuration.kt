@@ -5,6 +5,10 @@ import com.natpryce.konfig.ConfigurationProperties
 import com.natpryce.konfig.EnvironmentVariables
 import com.natpryce.konfig.getValue
 import com.natpryce.konfig.overriding
+import io.micrometer.core.instrument.Clock
+import io.micrometer.prometheusmetrics.PrometheusConfig
+import io.micrometer.prometheusmetrics.PrometheusMeterRegistry
+import io.prometheus.metrics.model.registry.PrometheusRegistry
 
 object Configuration {
     const val APP_NAME = "dp-ruting"
@@ -26,4 +30,12 @@ object Configuration {
         properties.list().reversed().fold(emptyMap()) { map, pair ->
             map + pair.second
         }
+
+    val prometheusRegistry by lazy {
+        PrometheusMeterRegistry(
+            PrometheusConfig.DEFAULT,
+            PrometheusRegistry.defaultRegistry,
+            Clock.SYSTEM,
+        )
+    }
 }
