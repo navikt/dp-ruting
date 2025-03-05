@@ -45,4 +45,44 @@ class JournalPostMapperTest {
             }.message shouldBe "Journalpost har ingen dokumenter"
         }
     }
+
+    @Test
+    fun `Kan hente journalpostId`() {
+        JournalPostMapper(
+            //language=json
+            """
+            {
+              "data": {
+                "journalpost": {
+                  "journalpostId": "123456789"
+                }
+              }
+            }
+            """.trimIndent(),
+        ).id shouldBe "123456789"
+    }
+
+    @Test
+    fun `forventer journalpostId som en tekst streng`() {
+        setOf(
+            //language=JSON
+            """ { "data": { "journalpost": { } } } """,
+            //language=JSON
+            """ { "data": { } } """,
+            //language=JSON
+            """ { } """,
+        ).forEach { json ->
+            val exception =
+                shouldThrow<IllegalArgumentException> {
+                    JournalPostMapper(json).id
+                }.message shouldBe "Journalpost mangler journalpostId"
+        }
+
+        shouldThrow<IllegalArgumentException> {
+            JournalPostMapper(
+                //language=JSON
+                """ { "data": { "journalpost": { "journalpostId": 123456789 } } } """,
+            ).id
+        }.message shouldBe "JournalpostId er ikke en tekststreng"
+    }
 }
