@@ -1,5 +1,6 @@
 package no.nav.dagpenger.ruting
 
+import io.kotest.assertions.throwables.shouldThrow
 import io.kotest.matchers.shouldBe
 import org.junit.jupiter.api.Test
 
@@ -29,5 +30,19 @@ class JournalPostMapperTest {
             }
             """.trimIndent(),
         ).skjemaType shouldBe SkjemaType.DAGPENGESØKNAD_ORDINÆR
+    }
+
+    @Test
+    fun `forventer minst et dokument i dokumenter lista`() {
+        setOf(
+            //language=JSON
+            """ { "data": { "journalpost": { "dokumenter": [] } } } """,
+            //language=JSON
+            """ { "data": { "journalpost": {  } } } """,
+        ).forEach { json ->
+            shouldThrow<IllegalArgumentException> {
+                JournalPostMapper(json).skjemaType
+            }.message shouldBe "Journalpost har ingen dokumenter"
+        }
     }
 }

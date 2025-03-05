@@ -13,6 +13,7 @@ data class Journalpost(
     constructor(json: String) : this(
         JournalPostMapper(json),
     )
+
     private constructor(mapper: JournalPostMapper) : this(
         skjemaType = mapper.skjemaType,
     )
