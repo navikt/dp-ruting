@@ -9,6 +9,7 @@ import com.github.navikt.tbd_libs.rapids_and_rivers_api.RapidsConnection
 import io.micrometer.core.instrument.MeterRegistry
 import kotlinx.coroutines.runBlocking
 import mu.KotlinLogging
+import mu.withLoggingContext
 
 private val logger = KotlinLogging.logger {}
 
@@ -38,15 +39,17 @@ internal class JoarkMottak(
         meterRegistry: MeterRegistry,
     ) {
         val joarkHendelse = packet.joarkHendelse()
-        val journalpost =
-            runBlocking {
-                safClient.hentJournalpost(joarkHendelse.journalpostId)
-            }
+        withLoggingContext("journalpostId" to joarkHendelse.journalpostId) {
+            val journalpost =
+                runBlocking {
+                    safClient.hentJournalpost(joarkHendelse.journalpostId)
+                }
 
-        logger.info { "Mottat joarkhendelse $joarkHendelse" }
-        logger.info { "Hentet journalpost $journalpost" }
-        meterRegistry.journalpostTotal(journalpost.skjemaType)
-        mediator.håndter(joarkHendelse)
+            logger.info { "Mottat joarkhendelse $joarkHendelse" }
+            logger.info { "Hentet journalpost $journalpost" }
+            meterRegistry.journalpostTotal(journalpost.skjemaType)
+            mediator.håndter(joarkHendelse)
+        }
     }
 }
 
