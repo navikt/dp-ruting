@@ -3,4 +3,5 @@ kafka:
 saf:
   app: saf-q1
   url: https://saf.dev-fss-pub.nais.io/graphql
+  host: saf.dev-fss-pub.nais.io
   scope: api://dev-fss.teamdokumenthandtering.saf-q1/.default
