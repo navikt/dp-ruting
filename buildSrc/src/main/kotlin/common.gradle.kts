@@ -16,6 +16,7 @@ repositories {
 
 dependencies {
     testImplementation(kotlin("test"))
+    implementation(platform(kotlin("bom")))
 }
 
 kotlin {
