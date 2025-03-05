@@ -9,6 +9,9 @@ import io.ktor.client.HttpClient
 import io.ktor.client.engine.HttpClientEngine
 import io.ktor.client.engine.cio.CIO
 import io.ktor.client.plugins.defaultRequest
+import io.ktor.client.plugins.logging.LogLevel
+import io.ktor.client.plugins.logging.Logger
+import io.ktor.client.plugins.logging.Logging
 import io.ktor.client.request.header
 import io.ktor.client.request.post
 import io.ktor.client.request.setBody
@@ -21,12 +24,14 @@ interface SafClient {
 class SafGraphClient(
     url: String,
     tokenProvider: () -> String,
-    private val httpClient: HttpClient = httpClient(url, tokenProvider),
+    debug: Boolean = false,
+    private val httpClient: HttpClient = httpClient(url, tokenProvider, debug),
 ) : SafClient {
     companion object {
         fun httpClient(
             url: String,
             tokenProvider: () -> String,
+            debug: Boolean,
             engine: HttpClientEngine = CIO.create(),
         ): HttpClient {
             return HttpClient(engine) {
@@ -35,6 +40,17 @@ class SafGraphClient(
                     url(url)
                     header("Content-Type", "application/json")
                     header("Authorization", "Bearer ${tokenProvider()}")
+                }
+                if (debug) {
+                    install(Logging) {
+                        level = LogLevel.ALL
+                        logger =
+                            object : Logger {
+                                override fun log(message: String) {
+                                    println(message)
+                                }
+                            }
+                    }
                 }
             }
         }

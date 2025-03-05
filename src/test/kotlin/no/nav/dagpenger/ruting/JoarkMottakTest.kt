@@ -24,7 +24,7 @@ class JoarkMottakTest {
 
         val safClient =
             mockk<SafClient>().also {
-                coEvery { it.hentJournalpost(any()) } returns Journalpost(json = """{}""")
+                coEvery { it.hentJournalpost(any()) } returns Journalpost(skjemaType = SkjemaType.DAGPENGESØKNAD_ORDINÆR)
             }
         JoarkMottak(rapidsConnection = rapid, safClient = safClient, mediator = mediator)
         rapid.sendTestMessage(

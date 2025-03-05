@@ -23,10 +23,11 @@ class SafGraphClientTest {
                     getAzureAdToken("dp-ruting", "api://dev-fss.teamdokumenthandtering.saf-q1/.default")
                 }
             },
+            debug = true,
         ).let {
             runBlocking {
                 it.hentJournalpost("690881908").let {
-                    println(it.json)
+                    println(it)
                 }
             }
         }
