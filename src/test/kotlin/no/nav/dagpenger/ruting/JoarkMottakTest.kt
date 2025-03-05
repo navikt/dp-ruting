@@ -3,6 +3,7 @@ package no.nav.dagpenger.ruting
 import com.github.navikt.tbd_libs.rapids_and_rivers.test_support.TestRapid
 import io.kotest.matchers.shouldBe
 import io.mockk.Runs
+import io.mockk.coEvery
 import io.mockk.every
 import io.mockk.just
 import io.mockk.mockk
@@ -20,7 +21,12 @@ class JoarkMottakTest {
             mockk<Mediator>().also {
                 every { it.håndter(capture(slot)) } just Runs
             }
-        JoarkMottak(rapidsConnection = rapid, safClient = mockk(), mediator = mediator)
+
+        val safClient =
+            mockk<SafClient>().also {
+                coEvery { it.hentJournalpost(any()) } returns Journalpost(json = """{}""")
+            }
+        JoarkMottak(rapidsConnection = rapid, safClient = safClient, mediator = mediator)
         rapid.sendTestMessage(
             joarkMelding(
                 journalpostId = "123456789",
