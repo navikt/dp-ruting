@@ -42,7 +42,3 @@ object SkjemaOppslag {
         return skjemaMap[skjemaKode]?.tittel ?: throw RuntimeException("Fant ikke skjema med kode $skjemaKode")
     }
 }
-
-fun main() {
-    println(SkjemaOppslag.finnTittel("NAV 10-07.78"))
-}
