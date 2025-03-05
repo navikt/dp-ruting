@@ -53,6 +53,7 @@ enum class SkjemaType(val skjemakode: String) {
     KOPI_AV_SLUTTAVTALE("V6"),
     FØDSELATTEST_BOSTEDSBEVIS_FOR_BARN_UNDER_18_ÅR("X8"),
     UTTALELSE_ELLER_VURDERING_FRA_KOMPETENT_FAGPERSONELL("XY"),
+    MELDEKORT("NAV 00-10.02"),
     ;
 
     companion object {
