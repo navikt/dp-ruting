@@ -5,3 +5,7 @@ saf:
   url: https://saf.dev-fss-pub.nais.io/graphql
   host: saf.dev-fss-pub.nais.io
   scope: api://dev-fss.teamdokumenthandtering.saf-q1/.default
+
+ingresses: |
+  ingresses:
+    - https://dp-ruting.intern.dev.nav.no
