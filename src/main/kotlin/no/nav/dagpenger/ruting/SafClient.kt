@@ -24,7 +24,7 @@ interface SafClient {
 class SafGraphClient(
     url: String,
     tokenProvider: () -> String,
-    debug: Boolean = true,
+    debug: Boolean = false,
     private val httpClient: HttpClient = httpClient(url, tokenProvider, debug),
 ) : SafClient {
     companion object {
