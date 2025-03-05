@@ -18,10 +18,6 @@ interface SafClient {
     suspend fun hentJournalpost(journalpostId: String): Journalpost
 }
 
-data class Journalpost(
-    val json: String,
-)
-
 class SafGraphClient(
     url: String,
     tokenProvider: () -> String,
