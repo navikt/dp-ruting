@@ -24,7 +24,7 @@ interface SafClient {
 class SafGraphClient(
     url: String,
     tokenProvider: () -> String,
-    debug: Boolean = false,
+    debug: Boolean = true,
     private val httpClient: HttpClient = httpClient(url, tokenProvider, debug),
 ) : SafClient {
     companion object {
@@ -43,7 +43,7 @@ class SafGraphClient(
                 }
                 if (debug) {
                     install(Logging) {
-                        level = LogLevel.ALL
+                        level = LogLevel.BODY
                         logger =
                             object : Logger {
                                 override fun log(message: String) {
