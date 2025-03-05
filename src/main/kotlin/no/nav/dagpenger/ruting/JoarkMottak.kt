@@ -45,6 +45,7 @@ internal class JoarkMottak(
 
         logger.info { "Mottat joarkhendelse $joarkHendelse" }
         logger.info { "Hentet journalpost $journalpost" }
+        meterRegistry.journalpostTotal(journalpost.skjemaType)
         mediator.håndter(joarkHendelse)
     }
 }
