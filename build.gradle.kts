@@ -15,6 +15,7 @@ dependencies {
     implementation(libs.ktor.client.content.negotiation)
     implementation(libs.ktor.client.logging.jvm)
     implementation("no.nav.dagpenger:oauth2-klient:2025.02.13-18.02.052b7c34baab")
+    implementation("io.prometheus:prometheus-metrics-core:1.3.6")
 
     testImplementation(libs.bundles.naisful.rapid.and.rivers.test)
     testImplementation(libs.mockk)
