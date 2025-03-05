@@ -1,9 +1,13 @@
 package no.nav.dagpenger.ruting
 
+import com.github.navikt.tbd_libs.rapids_and_rivers.JsonMessage
+
 data class Journalpost(
     val json: String,
 ) {
-    //TODO
-//    val dokumenter = JsonMessage.newMessage(json)["data"]["journalpost"]["dokumenter"]
-//    val brevkoder: List<String> = dokumenter.map { it["brevkode"].asText() }
+    // TODO
+    fun brevkoder(): List<String> {
+        val dokumenter = JsonMessage.newMessage(json)["data"]["journalpost"]["dokumenter"]
+        return dokumenter.map { it["brevkode"].asText() }
+    }
 }
