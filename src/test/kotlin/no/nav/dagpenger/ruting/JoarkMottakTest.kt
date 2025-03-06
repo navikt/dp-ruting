@@ -27,7 +27,7 @@ class JoarkMottakTest {
                 coEvery { it.hentJournalpost(any()) } returns
                     Journalpost(
                         id = "123456789",
-                        skjemaType = SkjemaType.DAGPENGESØKNAD_ORDINÆR,
+                        skjemaType = SkjemaTypeEnum.DAGPENGESØKNAD_ORDINÆR,
                     )
             }
         JoarkMottak(rapidsConnection = rapid, safClient = safClient, mediator = mediator)

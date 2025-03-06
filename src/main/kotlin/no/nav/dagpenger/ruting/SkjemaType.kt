@@ -1,6 +1,11 @@
 package no.nav.dagpenger.ruting
 
-enum class SkjemaType(val skjemakode: String) {
+interface SkjemaType {
+    val skjemakode: String
+    val navn: String
+}
+
+enum class SkjemaTypeEnum(override val skjemakode: String) : SkjemaType {
     DAGPENGESØKNAD_ORDINÆR("NAV 04-01.03"),
     DAGPENGESØKNAD_ORDINÆR_ETTERSENDING("NAVe 04-01.03"),
     DAGPENGESØKNAD_PERMITTERT("NAV 04-01.04"),
@@ -56,12 +61,16 @@ enum class SkjemaType(val skjemakode: String) {
     MELDEKORT("NAV 00-10.02"),
     ;
 
+    data class UkjentSkjemaKode(override val skjemakode: String) : SkjemaType {
+        override val navn: String = "Ukjent"
+    }
+
+    override val navn: String = this.name
+
     companion object {
         fun String.tilSkjemaType(): SkjemaType {
             return entries.firstOrNull { it.skjemakode == this }
-                ?: throw UkjentSkjemaKode("Ukjent skjemakode: $this")
+                ?: UkjentSkjemaKode(this)
         }
     }
 }
-
-class UkjentSkjemaKode(message: String) : RuntimeException(message)

@@ -29,7 +29,7 @@ class JournalpostMapperTest {
               }
             }
             """.trimIndent(),
-        ).skjemaType shouldBe SkjemaType.DAGPENGESØKNAD_ORDINÆR
+        ).skjemaType shouldBe SkjemaTypeEnum.DAGPENGESØKNAD_ORDINÆR
     }
 
     @Test

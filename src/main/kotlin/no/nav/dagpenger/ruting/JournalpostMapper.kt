@@ -7,7 +7,7 @@ import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule
 import com.fasterxml.jackson.module.kotlin.jacksonObjectMapper
 import com.github.navikt.tbd_libs.rapids_and_rivers.isMissingOrNull
 import mu.KotlinLogging
-import no.nav.dagpenger.ruting.SkjemaType.Companion.tilSkjemaType
+import no.nav.dagpenger.ruting.SkjemaTypeEnum.Companion.tilSkjemaType
 
 private val logger = KotlinLogging.logger { }
 
