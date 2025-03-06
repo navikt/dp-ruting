@@ -4,10 +4,10 @@ import io.kotest.assertions.throwables.shouldThrow
 import io.kotest.matchers.shouldBe
 import org.junit.jupiter.api.Test
 
-class JournalPostMapperTest {
+class JournalpostMapperTest {
     @Test
     fun `kan hente ut riktig skjemaType`() {
-        JournalPostMapper(
+        JournalpostMapper(
             //language=json
             """
             {
@@ -41,14 +41,14 @@ class JournalPostMapperTest {
             """ { "data": { "journalpost": {  } } } """,
         ).forEach { json ->
             shouldThrow<IllegalArgumentException> {
-                JournalPostMapper(json).skjemaType
+                JournalpostMapper(json).skjemaType
             }.message shouldBe "Journalpost har ingen dokumenter"
         }
     }
 
     @Test
     fun `Kan hente journalpostId`() {
-        JournalPostMapper(
+        JournalpostMapper(
             //language=json
             """
             {
@@ -74,12 +74,12 @@ class JournalPostMapperTest {
         ).forEach { json ->
             val exception =
                 shouldThrow<IllegalArgumentException> {
-                    JournalPostMapper(json).id
+                    JournalpostMapper(json).id
                 }.message shouldBe "Journalpost mangler journalpostId"
         }
 
         shouldThrow<IllegalArgumentException> {
-            JournalPostMapper(
+            JournalpostMapper(
                 //language=JSON
                 """ { "data": { "journalpost": { "journalpostId": 123456789 } } } """,
             ).id

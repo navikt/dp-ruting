@@ -5,10 +5,10 @@ data class Journalpost(
     val skjemaType: SkjemaType,
 ) {
     constructor(json: String) : this(
-        JournalPostMapper(json),
+        JournalpostMapper(json),
     )
 
-    private constructor(mapper: JournalPostMapper) : this(
+    private constructor(mapper: JournalpostMapper) : this(
         id = mapper.id,
         skjemaType = mapper.skjemaType,
     )

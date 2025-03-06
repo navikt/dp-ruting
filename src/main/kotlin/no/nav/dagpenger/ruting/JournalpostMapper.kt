@@ -11,7 +11,7 @@ import no.nav.dagpenger.ruting.SkjemaType.Companion.tilSkjemaType
 
 private val logger = KotlinLogging.logger { }
 
-class JournalPostMapper(json: String) {
+class JournalpostMapper(json: String) {
     companion object {
         private val objectMapper =
             jacksonObjectMapper()
