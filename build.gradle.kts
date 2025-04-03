@@ -9,7 +9,7 @@ dependencies {
     implementation(libs.kotlin.logging)
     implementation(libs.rapids.and.rivers)
     implementation(libs.konfig)
-    implementation("com.github.navikt.tbd-libs:naisful-app:2025.03.30-13.02-f7cb11ef")
+    implementation("com.github.navikt.tbd-libs:naisful-app:2025.04.02-15.56-d34332c4")
     implementation(libs.bundles.jackson)
     implementation(libs.ktor.client.cio)
     implementation(libs.ktor.client.content.negotiation)
